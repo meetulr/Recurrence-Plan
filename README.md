@@ -34,7 +34,7 @@
 5. We need a way to track the historical record for an event.
 
 ## Solution:
-### *Interfaces*
+### Interfaces
 ![RecurringEvents](https://github.com/PalisadoesFoundation/talawa-api/assets/55585268/f752edd7-363c-412a-a50e-5069b8c602d6)
 
 
@@ -42,10 +42,10 @@ The purpose and need for each of the fields and schemas will be explained in the
 
 **I request going through this whole approach thoroughly first (to see if the edge cases you're thinking of are already covered in this solution or not), and then discuss if anything's been left out. Thank you**.
 
-### *Approach*
+### Approach
 1. We will use the rrule libary and follow the dynamic generation approach.
 
-#### *Creating recurring events*
+#### Creating recurring events
 1. First, let's talk about the input:
     - The EventInput would have `recurring` field set to true, but about the `recurrence` field that we currently have, we should remove it and add an `rrule` field instead which would be a string.
     - Why? The recurrence field in the existing approach is an enum : `ONCE`, `WEEKLY`, `MONTHLY`, etc... But the rrule already has that in it's [`freq`](https://github.com/jkbrzt/rrule#rrule-constructor), and we want an exact pattern for event creation.
@@ -65,11 +65,11 @@ The purpose and need for each of the fields and schemas will be explained in the
     - Update the `latestInstanceDate` of the `RecurrenceRule` document created to be equal to the start date of the last instance we generated here.
 
 
-#### *Updating recurring events*
-1. **Updating this instance only:**
+#### Updating recurring events
+1. #### *Updating this instance only:*
     - This would be straightforward, just make a regular update.
 
-2. **Updating all instances / this and future instances:**
+2. #### *Updating all instances / this and future instances:*
 
     We would base it on the rrule:
     - If the rrule has not changed:
@@ -87,11 +87,11 @@ The purpose and need for each of the fields and schemas will be explained in the
   What I'm suggesting here is that when the user changes the rrule and hits "save", this and the future instances will be affected.
   *Note here that we're not creating a new TrueRecurringEvent document, just updating the existing one.*
 
-#### *Deleting recurring events*
-1. **Deleting this instance only:**
+#### Deleting recurring events
+1. #### *Deleting this instance only:*
     - Make a regular deletion.
 
-2. **Deleting all instances / this and future instances:**
+2. #### *Deleting all instances / this and future instances:*
     - For deleting all instances:
         - Delete all the recurring instances with the current `trueRecurringEventId`. (So you see, `TrueRecurringEvent`, aside from being used as the base event to create new instances, also connects all the instances, even if their `rrule` are different. Which means we could also use it to track the historical record of a recurring event, accross all the instances, no matter what recurrence pattern it followed at any point).
 
@@ -102,7 +102,7 @@ The purpose and need for each of the fields and schemas will be explained in the
 #### Thing to keep in mind: Updates would only be done on the `TrueRecurringEvent` if bulk operations being are done on the instances with the latest `RecurringRule`, because we want to generate new instances based on the latest `rrule` that the already generated instances were following. How do we ensure that?
   - By adding a check, of `endDate`s. i.e. we would only modify the `TrueRecurringEvent` if its `endDate` matches that of the current `RecurrenceRule`.
   
-#### *Querying events*
+#### Querying events
 
 Currently we're just querying all the events belonging to an organization. We would need significant modifications in the query or make a seperate query for this.
 These are the steps we'd follow:
@@ -114,10 +114,10 @@ These are the steps we'd follow:
   - Update the `latestInstanceDate` of the `RecurrenceRule` documents.
   - Return all the documents we fetched/generated here.
 
-#### *Handling exception instances*
+#### Handling exception instances
 1. With this approach, we don't have to worry about the single instances that have been updated/deleted, because the new instances are to be generated with `TrueRecurringEvent`.
 2. However, if a bulk operation is made (changing rrule, or other event specific parameters), then every instance conforming to the current rrule is affected, even the ones that were edited seperately in single instance updates (their dates might have been changed, attendees list might be modified, etc.), because they still follow that rrule. i.e. the rrule wins in the end. Same with deletion, all the events conforming to an rrule are deleted on a bulk delete operation.
 3. If we want to exclude a certain instance from such operations, we could add the `isException: true` for that instance. By doing that, we could make it completely independent (like a normal event), so that it won't be affected by the bulk operations. If we want it to conform to the rrule again, we could just set the `isException: false`.
 
-#### *Historical References*
+#### Historical References
 As mentioned earlier, `TrueRecurringEvent` will take care of that.
