@@ -100,19 +100,19 @@ The purpose and need for each of the fields and schemas will be explained in the
         - Delete all the recurring instances with the same `recurringRuleId` as the current document, starting from the current date (The way google calendar does it).
 
 ##### Thing to keep in mind: Updates would only be done on the `TrueRecurringEvent` if bulk operations being are done on the instances with the latest `RecurringRule`, because we want to generate new instances based on the latest `rrule` that the already generated instances were following. How do we ensure that?
-    - By adding a check, of `endDate`s. i.e. we would only modify the `TrueRecurringEvent` if its `endDate` matches that of the current `RecurrenceRule`.
+  - By adding a check, of `endDate`s. i.e. we would only modify the `TrueRecurringEvent` if its `endDate` matches that of the current `RecurrenceRule`.
   
 #### *Querying events*
 
 Currently we're just querying all the events belonging to an organization. We would need significant modifications in the query or make a seperate query for this.
 These are the steps we'd follow:
-    - Find all the events upto the date `X`(what we'd decided on earlier) ahead of the current date.
-    - Find all the `RecurrenceRule` documents with the `latestInstanceDate` less than `X` && `latestInstanceDate` not equaling the `endDate`.
-    - Find the `TrueRecurringEvent`s for those.
-    - Let's say the `endDate` for the current `RecurrenceRule` be `rRuleEndDate`.
-    - Generate the recurring instances starting from `latestInstanceDate` uptill `min(X, rRuleEndDate)` based on the `TrueRecurringEvent`.
-    - Update the `latestInstanceDate` of the `RecurrenceRule` documents.
-    - Return all the documents we fetched/generated here.
+  - Find all the events upto the date `X`(what we'd decided on earlier) ahead of the current date.
+  - Find all the `RecurrenceRule` documents with the `latestInstanceDate` less than `X` && `latestInstanceDate` not equaling the `endDate`.
+  - Find the `TrueRecurringEvent`s for those.
+  - Let's say the `endDate` for the current `RecurrenceRule` be `rRuleEndDate`.
+  - Generate the recurring instances starting from `latestInstanceDate` uptill `min(X, rRuleEndDate)` based on the `TrueRecurringEvent`.
+  - Update the `latestInstanceDate` of the `RecurrenceRule` documents.
+  - Return all the documents we fetched/generated here.
 
 #### *Handling exception instances*
 1. With this approach, we don't have to worry about the single instances that have been updated/deleted, because the new instances are to be generated with `TrueRecurringEvent`.
