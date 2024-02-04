@@ -28,7 +28,7 @@
 1. We need the ability to create recurring events.
 2. We need the functionality to implement custom recurring patterns, like top calendar apps out there.
 3. We need the ability to update and delete:
-  - a single instance of the recurring pattern
+    - a single instance of the recurring pattern
   - this and the future instances
   - all instances.
 5. We need a way to track the historical record for an event.
