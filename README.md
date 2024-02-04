@@ -1,5 +1,3 @@
-Alright... after going through the discussions and blogs, this is what I'd suggest:
-
 ## Table of Contents:
 
 1. [**Issue**](#issue)
