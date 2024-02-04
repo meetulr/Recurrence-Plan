@@ -14,7 +14,6 @@
         - [Deleting recurring events](#deleting-recurring-events)
             - [Deleting this instance only](#deleting-this-instance-only)
             - [Deleting all instances / this and future instances](#deleting-all-instances--this-and-future-instances)
-        - [Thing to keep in mind](#thing-to-keep-in-mind)
         - [Querying events](#querying-events)
         - [Handling exception instances](#handling-exception-instances)
         - [Historical References](#historical-references)
