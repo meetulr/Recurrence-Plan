@@ -73,7 +73,7 @@ The purpose and need for each of the fields and schemas will be explained in the
 
 2. ##### Updating all instances / this and future instances:
 
-    Here things would be a little complicated, and i would need your opinion on this. I think we should base it on the rrule:
+    We would base it on the rrule:
 - If the rrule has not changed:
   - then we can just make a regular update.
   - update the `TrueRecurringEvent` according the update inputs (which would be used as the new base event).
