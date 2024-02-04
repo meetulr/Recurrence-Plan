@@ -66,10 +66,10 @@ The purpose and need for each of the fields and schemas will be explained in the
 
 
 #### *Updating recurring events*
-1. ##### Updating this instance only:
+1. **Updating this instance only:**
     - This would be straightforward, just make a regular update.
 
-2. ##### Updating all instances / this and future instances:
+2. **Updating all instances / this and future instances:**
 
     We would base it on the rrule:
     - If the rrule has not changed:
@@ -88,10 +88,10 @@ The purpose and need for each of the fields and schemas will be explained in the
   *Note here that we're not creating a new TrueRecurringEvent document, just updating the existing one.*
 
 #### *Deleting recurring events*
-1. ##### Deleting this instance only:
+1. **Deleting this instance only:**
     - Make a regular deletion.
 
-2. ##### Deleting all instances / this and future instances:
+2. **Deleting all instances / this and future instances:**
     - For deleting all instances:
         - Delete all the recurring instances with the current `trueRecurringEventId`. (So you see, `TrueRecurringEvent`, aside from being used as the base event to create new instances, also connects all the instances, even if their `rrule` are different. Which means we could also use it to track the historical record of a recurring event, accross all the instances, no matter what recurrence pattern it followed at any point).
 
@@ -99,7 +99,7 @@ The purpose and need for each of the fields and schemas will be explained in the
         - Find the document that was created previously to the current document with the current `RecurrenceRule`, set the `latestInstanceDate` and the `endDate` of the `RecurrenceRule` to that instance's `startDate`. Update the `TrueRecurringEvent` accordingly (modifying the `endDate`).
         - Delete all the recurring instances with the same `recurringRuleId` as the current document, starting from the current date (The way google calendar does it).
 
-##### Thing to keep in mind: Updates would only be done on the `TrueRecurringEvent` if bulk operations being are done on the instances with the latest `RecurringRule`, because we want to generate new instances based on the latest `rrule` that the already generated instances were following. How do we ensure that?
+#### Thing to keep in mind: Updates would only be done on the `TrueRecurringEvent` if bulk operations being are done on the instances with the latest `RecurringRule`, because we want to generate new instances based on the latest `rrule` that the already generated instances were following. How do we ensure that?
   - By adding a check, of `endDate`s. i.e. we would only modify the `TrueRecurringEvent` if its `endDate` matches that of the current `RecurrenceRule`.
   
 #### *Querying events*
