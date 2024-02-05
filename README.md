@@ -75,7 +75,7 @@ The purpose and need for each of the fields and schemas will be explained in the
         - then we can just make a regular update.
         - update the `TrueRecurringEvent` according the update inputs (which would be used as the new base event).
     - If the rrule has changed:
-        - Now correct me if i'm wrong here, but the user would change the rrule for current and future events only, not the past events that has already occured (changing their recurrence pattern wouldn't make sense, any changes other than rrule that are made on them would be covered by the first point).
+        - The rrule would be changed for the current and future events only, not the past events which have already occurred (changing their recurrence pattern wouldn't make sense, any changes other than rrule that are made on them would be covered by the first point).
         - If so, we would follow these steps:
             - Find the last instance that was generated before the current instance, say `latestInstance`, and set the `latestInstanceDate` and the `endDate` of the `recurringRule` for the current pattern to be the `latestInstance's` `startDate`.
             - Delete every instance (current and the future) conforming to the current rrule. We can do this because we are generating events dynamically, i.e. we are only creating instances upto a certain date, so not many documents have to be deleted.
