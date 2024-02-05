@@ -52,7 +52,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
 2. After getting the input, we'd follow these steps:
     - Create a `RecurrenceRule` document that would contain the rrule sent from the frontend, let's name this document's _id to be `recurranceRuleId`.
-    - Create a `BaseRecurringEvent` that would just be like creating a normal event with `isBaseEvent: true`, let's name it's _id to be `baseRecurringEventId` (This is what we will use as the base event for generating instances.)
+    - Create a `BaseRecurringEvent` that would just be like creating a normal event with `isBaseRecurringEvent: true`, let's name it's _id to be `baseRecurringEventId` (This is what we will use as the base event for generating instances.)
     - Both of these would contain the `startDate` and the `endDate` as provided in the input.
     - We would decide on an endDate, say `X` months or years ahead from the current date, that would decide the number of instances we create in the createEvent mutation, or during the query.
     - Get the dates for the instances to be generated using the `rrule`. Here:
@@ -83,7 +83,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
             - Now, all the previous instances would have a different `RecurrenceRule` than the current and future ones. 
 
   What I'm suggesting here is that when the user changes the rrule and hits "save", this and the future instances will be affected.
-  *Note here that we're not creating a new TrueRecurringEvent document, just updating the existing one.*
+  *Note here that we're not creating a new `BaseRecurringEvent` document, just updating the existing one.*
 
 #### Deleting recurring events
 1. #### *Deleting this instance only:*
