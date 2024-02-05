@@ -34,8 +34,7 @@
 
 ## Solution:
 ### Interfaces
-![RecurringEvents](https://github.com/PalisadoesFoundation/talawa-api/assets/55585268/f752edd7-363c-412a-a50e-5069b8c602d6)
-
+![Interfaces](https://github.com/PalisadoesFoundation/talawa-api/assets/55585268/0cbaba12-7e4d-4a78-acd2-6d95f29e9aa8)
 
 The purpose and need for each of the fields and schemas will be explained in the approach as their necessity arises.
 
@@ -53,7 +52,7 @@ The purpose and need for each of the fields and schemas will be explained in the
 
 2. After getting the input, we'd follow these steps:
     - Create a `RecurrenceRule` document that would contain the rrule sent from the frontend, let's name this document's _id to be `recurranceRuleId`.
-    - Create a `TrueRecurringEvent` that would just be like creating a normal event, let's name it's _id to be `trueRecurringEventId` (This is what we will use as the base event for generating instances.)
+    - Create a `BaseRecurringEvent` that would just be like creating a normal event, let's name it's _id to be `baseRecurringEventId` (This is what we will use as the base event for generating instances.)
     - Both of these would contain the `startDate` and the `endDate` as provided in the input.
     - We would decide on an endDate, say `X` months or years ahead from the current date, that would decide the number of instances we create in the createEvent mutation, or during the query.
     - Get the dates for the instances to be generated using the `rrule`. Here:
