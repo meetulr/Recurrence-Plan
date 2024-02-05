@@ -114,9 +114,9 @@ These are the steps we'd follow:
   - Return all the documents we fetched/generated here.
 
 #### Handling exception instances
-1. With this approach, we don't have to worry about the single instances that have been updated/deleted, because the new instances are to be generated with `TrueRecurringEvent`.
-2. However, if a bulk operation is made (changing rrule, or other event specific parameters), then every instance conforming to the current rrule is affected, even the ones that were edited seperately in single instance updates (their dates might have been changed, attendees list might be modified, etc.), because they still follow that rrule. i.e. the rrule wins in the end. Same with deletion, all the events conforming to an rrule are deleted on a bulk delete operation.
-3. If we want to exclude a certain instance from such operations, we could add the `isException: true` for that instance. By doing that, we could make it completely independent (like a normal event), so that it won't be affected by the bulk operations. If we want it to conform to the rrule again, we could just set the `isException: false`.
+  - With this approach, we don't have to worry about the single instances that have been updated/deleted, because the new instances are to be generated with `TrueRecurringEvent`.
+  - However, if a bulk operation is made (changing rrule, or other event specific parameters), then every instance conforming to the current rrule is affected, even the ones that were edited seperately in single instance updates (their dates might have been changed, attendees list might be modified, etc.), because they still follow that rrule. i.e. the rrule wins in the end. Same with deletion, all the events conforming to an rrule are deleted on a bulk delete operation.
+  - If we want to exclude a certain instance from such operations, we could add the `isException: true` for that instance. By doing that, we could make it completely independent (like a normal event), so that it won't be affected by the bulk operations. If we want it to conform to the rrule again, we could just set the `isException: false`.
 
 #### Historical References
 As mentioned earlier, `TrueRecurringEvent` will take care of that.
