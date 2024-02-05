@@ -59,7 +59,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
         - If the event has no `endDate`, we'd generate events upto `X` date.
         - If the `endDate` is very far into the future, we'd generate events upto `X` date, and leave the rest for the query.
         - If there is an `endDate`, and the last date returned from the rrule is less than `X`, then we just create all the instances.
-    - All the instances (Event documents) we created in the previous step will be based on the `BaseRecurringEvent` document we created above. All of them would have their *recurrenceRuleId* field set to `recurranceRuleId`, and the *trueRecurringEventId* set to `BaseRecurringEventId` (from the first two steps).
+    - All the instances (Event documents) we created in the previous step will be based on the `BaseRecurringEvent` document we created above. All of them would have their *recurrenceRuleId* field set to `recurranceRuleId`, and the *BaseRecurringEventId* set to `BaseRecurringEventId` (from the first two steps).
     - Update the `latestInstanceDate` of the `RecurrenceRule` document created to be equal to the start date of the last instance we generated here.
 
 
