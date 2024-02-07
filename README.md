@@ -47,11 +47,11 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 1. First, let's talk about the input:
     - The EventInput would have `recurring` field set to true, but about the `recurrence` field that we currently have, we should remove it and add an `rrule` field instead which would be a string.
     - Why? The recurrence field in the existing approach is an enum : `ONCE`, `WEEKLY`, `MONTHLY`, etc... But the rrule already has that in it's [`freq`](https://github.com/jkbrzt/rrule#rrule-constructor), and we want an exact pattern for event creation.
-    -  We want to have google calendar like functionality. So we should be implementing modals similar to that in the frontend to select recurring patterns.
-    - We should use `rrule` in the frontend too, which, according to the values we select, and the boxes we check, would easily create an rrule string for us in the frontend and we could send it to the backend in the input.
+    - We want to have google calendar like functionality. So we should be implementing modals similar to that in the frontend to select recurrence patterns.
+    - According to the values we select, and the boxes we check, we would create a recurrenceRuleObject that would be sent alongside the eventInput to the backend. Then we can generate an rrule string based on that, and use it to generate dates.
 
 2. After getting the input, we'd follow these steps:
-    - Create a `RecurrenceRule` document that would contain the rrule sent from the frontend, let's name this document's _id to be `recurranceRuleId`.
+    - Create a `RecurrenceRule` document that would contain the rrule string and the rrule fields for easy understanding and debugging, let's name this document's _id to be `recurranceRuleId`.
     - Create a `BaseRecurringEvent` that would just be like creating a normal event with `isBaseRecurringEvent: true`, let's name it's _id to be `baseRecurringEventId` (This is what we will use as the base event for generating instances.)
     - Both of these would contain the `startDate` and the `endDate` as provided in the input.
     - We would decide on an endDate, say `X` months or years ahead from the current date, that would decide the number of instances we create in the createEvent mutation, or during the query.
