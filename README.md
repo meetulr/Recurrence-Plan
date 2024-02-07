@@ -91,7 +91,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
 2. #### *Deleting all instances / this and future instances:*
     - For deleting all instances:
-        - Delete all the recurring instances with the current `baseRecurringEventId`. (So you see, `BaseRecurringEvent`, aside from being used as the base event to create new instances, also connects all the instances, even if their `rrule` are different. Which means we could also use it to track the historical record of a recurring event, accross all the instances, no matter what recurrence pattern it followed at any point).
+        - Delete all the recurring instances with the current `recurrenceRuleId` (like google calendar).
 
     - For this and future instances:
         - Find the document that was created previously to the current document with the current `RecurrenceRule`, set the `latestInstanceDate` and the `endDate` of the `RecurrenceRule` to that instance's `startDate`. Update the `BaseRecurringEvent` accordingly (modifying the `endDate`).
@@ -118,4 +118,4 @@ These are the steps we'd follow:
   - If we want to exclude a certain instance from such operations, we could add the `isRecurringEventException: true` for that instance. By doing that, we could make it completely independent (like a normal event), so that it won't be affected by the bulk operations. If we want it to conform to the rrule again, we could just set the `isRecurringEventException: false`.
 
 #### Historical References
-As mentioned earlier, `BaseRecurringEvent` will take care of that.
+  - `BaseRecurringEvent`, aside from being used as the base event to create new instances, also connects all the instances, even if their `rrule` are different. Which means we could also use it to track the historical records for a recurring event, accross all the instances, no matter what recurrence pattern it followed at any point.
