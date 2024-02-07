@@ -48,7 +48,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
     - The EventInput would have `recurring` field set to true, but about the `recurrence` field that we currently have, we should remove it and add an `rrule` field instead which would be a string.
     - Why? The recurrence field in the existing approach is an enum : `ONCE`, `WEEKLY`, `MONTHLY`, etc... But the rrule already has that in it's [`freq`](https://github.com/jkbrzt/rrule#rrule-constructor), and we want an exact pattern for event creation.
     - We want to have google calendar like functionality. So we should be implementing modals similar to that in the frontend to select recurrence patterns.
-    - According to the values we select, and the boxes we check, we would create a recurrenceRuleObject that would be sent alongside the eventInput to the backend. Then we can generate an rrule string based on that, and use it to generate dates.
+    - According to the values we select, and the boxes we check, we would create a recurrenceRuleObject that would be sent alongside the eventInput to the backend. There we would generate an rrule string based on that object.
 
 2. After getting the input, we'd follow these steps:
     - Create a `RecurrenceRule` document that would contain the rrule string and the rrule fields for easy understanding and debugging, let's name this document's _id to be `recurranceRuleId`.
