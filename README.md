@@ -24,9 +24,9 @@
 1. We have the functionalities to deal with single non-recurring events.
 
 ### *What do we need?*
-1. We need the ability to create recurring events.
+1. We need the functionality to create recurring events.
 2. We need the functionality to implement custom recurring patterns, like top calendar apps out there.
-3. We need the ability to update and delete:
+3. We need the functionality to update and delete:
     - a single instance of the recurring pattern
     - this and the future instances
     - all instances.
