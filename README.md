@@ -102,8 +102,8 @@ The purpose and need for each of the fields and Interfaces will be explained in 
   
 #### Querying events
 
-In the query, we would add a function for creating recurring event instances, and then query all the events and return them.
-  - For the dynamic instances generation, we'd follow these steps:
+In the query, we would add a function for creating recurring event instances, and then query all the events and return them. Here's the two step process:
+  - Generate recurring event instances. Here we'd follow these steps:
     - Fix a `queryUptoDate`.
     - Find all the `RecurrenceRule` documents with the `latestInstanceDate` less than `queryUptoDate`.
     - For every recurrenceRule document queried:
