@@ -102,15 +102,17 @@ The purpose and need for each of the fields and Interfaces will be explained in 
   
 #### Querying events
 
-Currently we're just querying all the events belonging to an organization. We would need significant modifications in the query or make a seperate query for this.
-These are the steps we'd follow:
-  - Find all the events upto the date `X`(what we'd decided on earlier) ahead of the current date.
-  - Find all the `RecurrenceRule` documents with the `latestInstanceDate` less than `X` && `latestInstanceDate` not equaling the `endDate`.
-  - Find the `BaseRecurringEvent`s for those.
-  - Let's say the `endDate` for the current `RecurrenceRule` be `rRuleEndDate`.
-  - Generate the recurring instances starting from `latestInstanceDate` uptill `min(X, rRuleEndDate)` based on the `BaseRecurringEvent`.
-  - Update the `latestInstanceDate` of the `RecurrenceRule` documents.
-  - Return all the documents we fetched/generated here.
+Currently we're just querying all the events belonging to an organization. We would add a function for creating recurring event instances, and then query all the events.
+  - For the dynamic instances generation, we'd follow these steps:
+    - Fix a `queryUptoDate`.
+    - Find all the `RecurrenceRule` documents with the `latestInstanceDate` less than `queryUptoDate`.
+    - For every recurrenceRule document queried:
+      - Find the `BaseRecurringEvent`.
+      - Generate new the recurring instance dates after `latestInstanceDate`.
+      - Account for the number of existing instances following that recurrence pattern and how many more to generate based on the `RecurrenceRule`'s count (if specified).
+      - Generate more instances based on the `BaseRecurringEvent`.
+      - If more instances were created, update the `latestInstanceDate`.
+  - Query events according to the inputs (`where` and `sort`) and return them.
 
 #### Handling exception instances
   - With this approach, we don't have to worry about the single instances that have been updated/deleted, because the new instances are to be generated with `BaseRecurringEvent`.
