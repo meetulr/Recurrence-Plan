@@ -34,7 +34,7 @@
 
 ## Solution:
 ### Interfaces
-![recurrenceInterfaces](https://github.com/PalisadoesFoundation/talawa-api/assets/55585268/1dbeeb56-78d9-42af-9d7b-2c68a3005d85)
+![recurrenceInterfaces](https://github.com/PalisadoesFoundation/talawa-api/assets/55585268/57c1be3f-6443-4a76-b731-6fd721e61e65)
 
 The purpose and need for each of the fields and Interfaces will be explained in the approach as their necessity arises.
 
