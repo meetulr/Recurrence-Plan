@@ -87,7 +87,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
             - Now, all the previous instances would have a different `RecurrenceRule` than the current and future ones. 
 
   What I'm suggesting here is that when the user changes the `recurrenceRule` and hits "save", this and the future instances will be affected.
-  *Note here that we're not creating a new `BaseRecurringEvent` document, just updating the existing one.*
+  **Note here that we're not creating a new `BaseRecurringEvent` document, just updating the existing one.**
 
 #### Deleting recurring events
 1. #### *Deleting this instance only:*
