@@ -68,18 +68,21 @@ The purpose and need for each of the fields and Interfaces will be explained in 
     - This would be straightforward, just make a regular update.
 
 2. #### *Updating all instances / this and future instances:*
-
-    We would base it on the `rrule`:
-    - If the `rrule` has not changed:
+    For single events made recurring:
+    - Get the data used to generate the instances, i.e. the current data of the event, and the latest data from the update input.
+    - Follow the steps for creating a recurring event.
+    - Delete the current event and its associations, as new ones would be generated while generating the instances.
+    While updating a recurring event, we would base it on the `recurrenceRule`:
+    - If the `recurrenceRule` has not changed:
         - then we can just make a regular update.
-        - update the `BaseRecurringEvent` according the update inputs (which would be used as the new base event).
-    - If the `rrule` has changed:
-        - The `rrule` would be changed for the current and future events only, not the past events which have already occurred (changing their recurrence pattern wouldn't make sense, the first point would cover all the other event specific changes).
-        - If so, we would follow these steps:
-            - Find the last instance that was generated before the current instance, say `latestInstance`, and set the `latestInstanceDate` and the `endDate` of the `recurrenceRule` for the current pattern to be the `latestInstance's` `startDate`.
-            - Delete every instance (current and the future) conforming to the current rrule. We can do this because we are generating events dynamically, i.e. we are only creating instances upto a certain date, so not many documents have to be deleted.
-            - Update the `BaseRecurringEvent` document to have values of the current update input (which would be used as the new base event).
-            - Create a new `RecurrenceRule` document with the new `rrule` from the input. Set it's `startDate` as the current date, and `endDate` as the `BaseRecurringEvent` `endDate`. Now, follow the same steps that were used in creating events in createEvent mutation to generate instances.
+        - update the `BaseRecurringEvent` if required according the update inputs (which would be used as the new base event).
+    - If the `recurrenceRule` has changed:
+        - The `recurrenceRule` would be changed for the current and future events only, not the past events which have already occurred (changing their recurrence pattern wouldn't make sense, the first point would cover all the other event specific changes).
+        - We would follow these steps:
+            - Generate new instances based on the new `recurrenceRule`.
+            - Delete every instance (current and the future) conforming to the old `recurrenceRule`. We can do this because we are generating events dynamically, i.e. we are only creating instances upto a certain date, so not many documents have to be deleted.
+            - Find the latest instance that was following the old `recurrenceRule`, say `latestInstance`, and set the `latestInstanceDate` and the `endDate` of the old `recurrenceRule` to be the `latestInstance's` `startDate`.
+            - Update the `BaseRecurringEvent` document if required to have values of the current update input (which would be used as the new base event).
             - Now, all the previous instances would have a different `RecurrenceRule` than the current and future ones. 
 
   What I'm suggesting here is that when the user changes the rrule and hits "save", this and the future instances will be affected.
