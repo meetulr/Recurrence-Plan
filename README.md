@@ -72,6 +72,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
     - Get the data used to generate the instances, i.e. the current data of the event, and the latest data from the update input.
     - Follow the steps for creating a recurring event.
     - Delete the current event and its associations, as new ones would be generated while generating the instances.
+    
     While updating a recurring event, we would base it on the `recurrenceRule`:
     - If the `recurrenceRule` has not changed:
         - then we can just make a regular update.
