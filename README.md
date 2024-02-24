@@ -64,7 +64,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
 
 #### Updating recurring events
-1. #### *Updating this instance only:*
+1. #### *Updating this instance only / updating the `isRecurringEventException` status of an instance:*
     - This would be straightforward, just make a regular update.
 
 2. #### *Updating all instances / this and future instances:*
@@ -86,7 +86,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
             - Update the `BaseRecurringEvent` document if required to have values of the current update input (which would be used as the new base event).
             - Now, all the previous instances would have a different `RecurrenceRule` than the current and future ones. 
 
-  What I'm suggesting here is that when the user changes the rrule and hits "save", this and the future instances will be affected.
+  What I'm suggesting here is that when the user changes the `recurrenceRule` and hits "save", this and the future instances will be affected.
   *Note here that we're not creating a new `BaseRecurringEvent` document, just updating the existing one.*
 
 #### Deleting recurring events
