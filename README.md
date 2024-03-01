@@ -1,3 +1,4 @@
+
 ## Table of Contents:
 
 1. [**Issue**](#issue)
@@ -16,7 +17,14 @@
             - [Deleting all instances / this and future instances](#deleting-all-instances--this-and-future-instances)
         - [Querying events](#querying-events)
         - [Handling exception instances](#handling-exception-instances)
-        - [Historical References](#historical-references)
+        - [Historical Records](#historical-records)
+
+3. [**References**](#references)
+    - [rrule](#rrule)
+    - [RecurrenceRule](#recurrencerule)
+    - [BaseRecurringEvent](#baserecurringevent)
+    - [Recurring Event Instance](#recurring-event-instance)
+    - [Recurring Event Exception Instance](#recurring-event-exception-instance)
 
 
 ## Issue:
@@ -124,5 +132,68 @@ In the query, we would add a function for creating recurring event instances, an
   - However, if a bulk operation is made (changing rrule, or other event specific parameters), then every instance conforming to the current rrule is affected, even the ones that were edited seperately in single instance updates (their dates might have been changed, attendees list might be modified, etc.), because they still follow that rrule. i.e. the rrule wins in the end. Same with deletion, all the events conforming to an rrule are deleted on a bulk delete operation.
   - If we want to exclude a certain instance from such operations, we could add the `isRecurringEventException: true` for that instance. By doing that, we could make it completely independent (like a normal event), so that it won't be affected by the bulk operations. If we want it to conform to the rrule again, we could just set the `isRecurringEventException: false`.
 
-#### Historical References
+#### Historical Records
   - `BaseRecurringEvent`, aside from being used as the base event to create new instances, also connects all the instances, even if their `rrule` are different. Which means we could also use it to track the historical records for a recurring event, accross all the instances, no matter what recurrence pattern it followed at any point.
+
+## References
+### rrule 
+
+The library we're using to automatically generate the dates for recurrence given a `RecurrenceRule`. Official repo: [`rrule`](https://github.com/jkbrzt/rrule)
+
+### RecurrenceRule
+
+A schema containing the properties of that represents the recurrence rule followed by a recurring event. Currently it has three properties:
+```javascript 
+	interface RecurrenceRule {
+		frequency: ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"]
+		weekdays: ["MONDAY", ... , "SUNDAY"]
+		count: number
+		baseRecurringEventId: ObjectId
+	}
+ ```
+   - **frequency**: Frequency of recurrence.
+   - **weekDays**: The days of the week at which the instances would be scheduled.
+   - **count**: The number of instances for that recurring event.
+   - ...more recurrence specific properties could be added to this interface.
+   - **baseRecurringEventId**: The `BaseRecurringEvent` for that recurring event.
+
+### BaseRecurringEvent
+
+  - A special type of event, that connects all the instances of a recurring event, even across different recurrence patterns, which is useful for tracking the historical records of a recurring event.
+  - It is also used as the base event to generate new recurring event instances during queries. As we can't just use the latest instance, which could be an `exception` instance.
+  There would be a flag in the event interface indicating whether it's a `BaseRecurringEvent`:
+ ```javascript 
+	interface Event {
+		  //...existing event fields
+		  isBaseRecurringEvent: true
+	}
+ ```
+
+### Recurring Event Instance
+
+Every instance of a recurring event would have these fields:
+ ```javascript 
+	interface Event {
+		  //...existing event fields
+		  isBaseRecurringEvent: false
+		  recurrenceRuleId: ObjectId
+		  baseRecurringEvent: ObjectId
+	}
+ ```
+   - **isBaseRecurringEvent**: The instance itself would not be the base recurring event.
+   - **recurrenceRuleId**: Representing the `RecurrenceRule` followed by the recurring event.
+   - **baseRecurringEventId**: Representing the `BaseRecurringEvent` for that recurring event.
+
+### Recurring Event Exception Instance
+
+  - The bulk operations on a recurring event (`update`/`delete` multiple instances) would affect every instance following that `RecurrenceRule`.
+  - If we want some instance to not be affected by those bulk operations, we could make it an `exception` to the `RecurrenceRule` rule it was following.
+There would be a flag to mark an exception instance:
+   ```javascript 
+	interface Event {
+		  //...existing event fields
+		  isRecurringEventException: true
+	}
+ ```
+   - With this flag, a recurring event instance could be like a single non-recurring event.
+   - If we want it to conform to the recurrence rule again, we could update the `isRecurringEventException: false`.
