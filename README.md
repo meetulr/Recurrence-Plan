@@ -90,12 +90,13 @@ The purpose and need for each of the fields and Interfaces will be explained in 
   **Note here that we're not creating a new `BaseRecurringEvent` document, just updating the existing one.**
 
 #### Deleting recurring events
-1. #### *Deleting this instance only:*
+1. #### *Deleting an exception instance / deleting this instance only:*
     - Make a regular deletion.
 
 2. #### *Deleting all instances / this and future instances:*
     - For deleting all instances:
         - Delete all the recurring instances with the current `recurrenceRuleId` (like google calendar).
+        - Update the `endDate` of the `baseRecurringEvent` accordingly.
 
     - For this and future instances:
         - Find the document that was created previously to the current document with the current `RecurrenceRule`, set the `latestInstanceDate` and the `endDate` of the `RecurrenceRule` to that instance's `startDate`. Update the `BaseRecurringEvent` accordingly (modifying the `endDate`).
