@@ -1,8 +1,7 @@
 
 ## Table of Contents:
 
-1. [**Issue**](#issue)
-    - [What do we want?](#what-do-we-want)
+1. [**What do we need**](#what-do-we-need)
 
 2. [**Solution**](#solution)
     - [Interfaces](#interfaces)
@@ -26,11 +25,10 @@
     - [Recurring Event Exception Instance](#recurring-event-exception-instance)
 
 
-## Issue:
-### *What do we want?*
-1. We need the functionality to create recurring events.
-2. We need the functionality to implement custom recurring patterns, like top calendar apps out there.
-3. We need the functionality to update and delete:
+## What do we need?
+1. The functionality to create recurring events.
+2. The functionality to implement custom recurring patterns, like top calendar apps out there.
+3. The functionality to update and delete:
     - a single instance of the recurring pattern.
     - this and the future instances.
     - all instances.
