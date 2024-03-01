@@ -9,7 +9,7 @@
     - [Approach](#approach)
         - [Creating recurring events](#creating-recurring-events)
         - [Updating recurring events](#updating-recurring-events)
-            - [Updating this instance only](#updating-this-instance-only--updating-the-`isRecurringEventException`-status-of-an-instance)
+            - [Updating this instance only](#updating-this-instance-only--updating-the-isRecurringEventException-status-of-an-instance)
             - [Updating all instances / this and future instances](#updating-all-instances--this-and-future-instances)
         - [Deleting recurring events](#deleting-recurring-events)
             - [Deleting this instance only](#deleting-this-instance-only)
