@@ -191,8 +191,8 @@ Every instance of a recurring event would have these fields:
 There would be a flag to mark an exception instance:
    ```javascript 
 	interface Event {
-		  //...existing event fields
-		  isRecurringEventException: true
+	  //...existing event fields
+	  isRecurringEventException: true
 	}
  ```
    - With this flag, a recurring event instance could be like a single non-recurring event.
