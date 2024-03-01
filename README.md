@@ -145,10 +145,10 @@ The library we're using to automatically generate the dates for recurrence given
 A schema containing the properties of that represents the recurrence rule followed by a recurring event. Currently it has three properties:
 ```javascript 
 	interface RecurrenceRule {
-		frequency: ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"]
-		weekdays: ["MONDAY", ... , "SUNDAY"]
-		count: number
-		baseRecurringEventId: ObjectId
+	  frequency: ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"]
+	  weekdays: ["MONDAY", ... , "SUNDAY"]
+	  count: number
+	  baseRecurringEventId: ObjectId
 	}
  ```
    - **frequency**: Frequency of recurrence.
@@ -164,8 +164,8 @@ A schema containing the properties of that represents the recurrence rule follow
   There would be a flag in the event interface indicating whether it's a `BaseRecurringEvent`:
  ```javascript 
 	interface Event {
-		  //...existing event fields
-		  isBaseRecurringEvent: true
+	  //...existing event fields
+	  isBaseRecurringEvent: true
 	}
  ```
 
@@ -174,10 +174,10 @@ A schema containing the properties of that represents the recurrence rule follow
 Every instance of a recurring event would have these fields:
  ```javascript 
 	interface Event {
-		  //...existing event fields
-		  isBaseRecurringEvent: false
-		  recurrenceRuleId: ObjectId
-		  baseRecurringEvent: ObjectId
+	  //...existing event fields
+	  isBaseRecurringEvent: false
+	  recurrenceRuleId: ObjectId
+	  baseRecurringEvent: ObjectId
 	}
  ```
    - **isBaseRecurringEvent**: The instance itself would not be the base recurring event.
