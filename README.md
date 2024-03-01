@@ -161,7 +161,7 @@ The library we're using that automatically generate the dates of recurrence for 
 
 A schema containing the properties of that represents the recurrence rule followed by a recurring event. Currently it has three properties:
 ```javascript 
-  interface RecurrenceRule {
+  interface InterfaceRecurrenceRule {
     recurrenceRuleString: string
     frequency: ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"]
     weekdays: ["MONDAY", ... , "SUNDAY"]
@@ -182,7 +182,7 @@ A schema containing the properties of that represents the recurrence rule follow
   - It is also used as the base event to generate new recurring event instances during queries. As we can't just use the latest instance, which could be an `exception` instance.
   There would be a flag in the event interface indicating whether it's a `BaseRecurringEvent`:
 ```javascript 
-  interface Event {
+  interface InterfaceEvent {
     //...existing event fields
     isBaseRecurringEvent: true
   }
@@ -192,7 +192,7 @@ A schema containing the properties of that represents the recurrence rule follow
 
 Every instance of a recurring event would have these fields:
 ```javascript 
-  interface Event {
+  interface InterfaceEvent {
     //...existing event fields
     isBaseRecurringEvent: false
     recurrenceRuleId: ObjectId
@@ -209,7 +209,7 @@ Every instance of a recurring event would have these fields:
   - If we want some instance to not be affected by those bulk operations, we could make it an `exception` to the `RecurrenceRule` rule it was following.
 There would be a flag to mark an exception instance:
 ```javascript 
-  interface Event {
+  interface InterfaceEvent {
     //...existing event fields
     isRecurringEventException: true
   }
