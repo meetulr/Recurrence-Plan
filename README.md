@@ -33,7 +33,7 @@
     - a single instance.
     - this and following instances.
     - all instances.
-   following a recurrence pattern.
+      following a recurrence pattern.
 5. A way to track the historical records of a recurring event.
 
 ## Solution:
