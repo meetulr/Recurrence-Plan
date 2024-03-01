@@ -1,6 +1,8 @@
+## Unserstanding The Creation and Management of Recurring Events
+
 ## Table of Contents:
 
-1. [**What do we need**](#what-do-we-need)
+1. [**What do we need?**](#what-do-we-need)
 
 2. [**Solution**](#solution)
     - [Interfaces](#interfaces)
