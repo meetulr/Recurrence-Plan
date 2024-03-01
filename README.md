@@ -30,10 +30,11 @@
 1. The functionality to create recurring events.
 2. The functionality to have custom recurrence patterns, like top calendar apps out there.
 3. The functionality to update and delete:
-    - a single instance of the recurring pattern.
-    - this and the future instances.
+    - a single instance.
+    - this and following instances.
     - all instances.
-5. We need a way to track the historical records of an event.
+   following a recurrence pattern.
+5. A way to track the historical records of a recurring event.
 
 ## Solution:
 ### Interfaces
