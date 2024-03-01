@@ -28,12 +28,11 @@
 
 ## What do we need?
 1. The functionality to create recurring events.
-2. The functionality to have custom recurrence patterns, like top calendar apps out there.
+2. The functionality to have custom recurrence patterns, like the top calendar apps out there.
 3. The functionality to update and delete:
     - a single instance.
     - this and following instances.
-    - all instances.
-      following a recurrence pattern.
+    - all instances, that are following a recurrence pattern.
 5. A way to track the historical records of a recurring event.
 
 ## Solution:
@@ -59,19 +58,14 @@
 
 The purpose and need for each of the fields and Interfaces will be explained in the approach as their necessity arises.
 
-**I request going through this whole approach thoroughly first (to see if the edge cases you're thinking of are already covered in this solution or not), and then discuss if anything's been left out. Thank you**.
-
 ### Approach
-1. We will use the rrule libary and follow the dynamic generation approach.
+1. We will use the `rrule` libary and follow the dynamic generation approach.
 
 #### Creating recurring events
-1. First, let's talk about the input:
-    - The EventInput would have `recurring` field set to true, but about the `recurrence` field that we currently have, we should remove it and add an `rrule` field instead which would be a string.
-    - Why? The recurrence field in the existing approach is an enum : `ONCE`, `WEEKLY`, `MONTHLY`, etc... But the rrule already has that in it's [`freq`](https://github.com/jkbrzt/rrule#rrule-constructor), and we want an exact pattern for event creation.
-    - We want to have google calendar like functionality. So we should be implementing modals similar to that in the frontend to select recurrence patterns.
-    - According to the values we select, and the boxes we check, we would create a recurrenceRuleObject that would be sent alongside the eventInput to the backend. There we would generate an rrule string based on that object.
+1. Create event input:
+    - Along with the general `EventInput`, there would be a `recurrenceRuleData` object too (which, if not provided, would default to weekly recurrence), which would contain the recurrence pattern.
 
-2. After getting the input, we'd follow these steps:
+3. After getting the input, we'd follow these steps:
     - Create a `RecurrenceRule` document that would contain the rrule string and the rrule fields for easy understanding and debugging, let's name this document's _id to be `recurranceRuleId`.
     - Create a `BaseRecurringEvent` that would just be like creating a normal event with `isBaseRecurringEvent: true`, let's name it's _id to be `baseRecurringEventId` (This is what we will use as the base event for generating instances.)
     - Both of these would contain the `startDate` and the `endDate` as provided in the input.
