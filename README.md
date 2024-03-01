@@ -47,14 +47,14 @@
     // ...existing event fields
     isRecurringEventException: boolean;
     isBaseRecurringEvent: boolean;
-    recurrenceRuleId: PopulatedDoc<InterfaceRecurrenceRule & Document>;
-    baseRecurringEventId: PopulatedDoc<InterfaceEvent & Document>;
+    recurrenceRuleId: ObjectId;
+    baseRecurringEventId: ObjectId;
   }
 
   interface InterfaceRecurrenceRule {
     // ...recurrence specific properties (frequency, count, etc.)
     recurrenceRuleString: string;
-    baseRecurringEventId: PopulatedDoc<InterfaceEvent & Document>;
+    baseRecurringEventId: ObjectId;
     startDate: Date;
     endDate: Date;
     latestInstanceDate: Date;
