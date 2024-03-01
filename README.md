@@ -1,4 +1,3 @@
-
 ## Table of Contents:
 
 1. [**What do we need**](#what-do-we-need)
@@ -27,7 +26,7 @@
 
 ## What do we need?
 1. The functionality to create recurring events.
-2. The functionality to implement custom recurring patterns, like top calendar apps out there.
+2. The functionality to have custom recurrence patterns, like top calendar apps out there.
 3. The functionality to update and delete:
     - a single instance of the recurring pattern.
     - this and the future instances.
