@@ -102,7 +102,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
         - Find the document that was created previously to the current document with the current `RecurrenceRule`, set the `latestInstanceDate` and the `endDate` of the `RecurrenceRule` to that instance's `startDate`. Update the `BaseRecurringEvent` accordingly (modifying the `endDate`).
         - Delete all the recurring instances with the same `recurrenceRuleId` as the current document, starting from the current date (The way google calendar does it).
 
-#### Thing to keep in mind: Updates would only be done on the `BaseRecurringEvent` if bulk operations being are done on the instances with the latest `RecurringRule`, because we want to generate new instances based on the latest `rrule` that the already generated instances were following. How do we ensure that?
+#### Thing to keep in mind: Updates would only be done on the `BaseRecurringEvent` if bulk operations being are done on the instances with the latest `RecurringRule`, because we want to generate new instances based on the latest `recurrenceRule` that the already generated instances were following. How do we ensure that?
   - By adding a check, of `endDate`s. i.e. we would only modify the `BaseRecurringEvent` if its `endDate` matches that of the current `RecurrenceRule`.
   
 #### Querying events
