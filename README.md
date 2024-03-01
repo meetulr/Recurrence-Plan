@@ -2,8 +2,7 @@
 ## Table of Contents:
 
 1. [**Issue**](#issue)
-    - [What do we have?](#what-do-we-have)
-    - [What do we need?](#what-do-we-need)
+    - [What do we want?](#what-do-we-want)
 
 2. [**Solution**](#solution)
     - [Interfaces](#interfaces)
@@ -28,10 +27,7 @@
 
 
 ## Issue:
-### *What do we have?*
-1. We have the functionalities to deal with single non-recurring events.
-
-### *What do we need?*
+### *What do we want?*
 1. We need the functionality to create recurring events.
 2. We need the functionality to implement custom recurring patterns, like top calendar apps out there.
 3. We need the functionality to update and delete:
