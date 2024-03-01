@@ -9,10 +9,10 @@
     - [Approach](#approach)
         - [Creating recurring events](#creating-recurring-events)
         - [Updating recurring events](#updating-recurring-events)
-            - [Updating this instance only](#updating-this-instance-only--updating-the-isRecurringEventException-status-of-an-instance)
+            - [Updating this instance only / updating an exception instance](#updating-this-instance-only--updating-an-exception-instance)
             - [Updating all instances / this and future instances](#updating-all-instances--this-and-future-instances)
         - [Deleting recurring events](#deleting-recurring-events)
-            - [Deleting this instance only](#deleting-this-instance-only)
+            - [Deleting this instance only / deleting an exception instance](#deleting-this-instance-only--deleting-an-exception-instance)
             - [Deleting all instances / this and future instances](#deleting-all-instances--this-and-future-instances)
         - [Querying events](#querying-events)
         - [Handling exception instances](#handling-exception-instances)
@@ -64,7 +64,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
 
 #### Updating recurring events
-1. #### *Updating this instance only / updating the `isRecurringEventException` status of an instance:*
+1. #### *Updating this instance only / updating an `exception` instance:*
     - This would be straightforward, just make a regular update.
 
 2. #### *Updating all instances / this and future instances:*
@@ -90,7 +90,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
   **Note here that we're not creating a new `BaseRecurringEvent` document, just updating the existing one.**
 
 #### Deleting recurring events
-1. #### *Deleting an exception instance / deleting this instance only:*
+1. #### *Deleting this instance only / deleting an exception instance:*
     - Make a regular deletion.
 
 2. #### *Deleting all instances / this and future instances:*
