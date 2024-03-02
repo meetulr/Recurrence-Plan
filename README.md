@@ -149,7 +149,7 @@ The library we're using that automatically generate the dates of recurrence give
 
 ### RecurrenceRule
 
-A document containing the properties of that represents the recurrence rule followed by a recurring event. Currently it has three properties:
+A document containing the properties that represents the recurrence rule followed by a recurring event:
 ```javascript 
   interface InterfaceRecurrenceRule {
     recurrenceRuleString: string
