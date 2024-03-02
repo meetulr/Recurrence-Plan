@@ -145,7 +145,7 @@ In the query, we would add a function for creating recurring event instances, an
 ## References
 ### rrule 
 
-The library we're using that automatically generate the dates of recurrence for a `RecurrenceRule`. Official repo: [`rrule`](https://github.com/jkbrzt/rrule)
+The library we're using that automatically generate the dates of recurrence given a `RecurrenceRule`. Official repo: [`rrule`](https://github.com/jkbrzt/rrule)
 
 ### RecurrenceRule
 
