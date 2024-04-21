@@ -1,5 +1,5 @@
 
-## The Creation and Management of Recurring Events
+## Unserstanding The Creation and Management of Recurring Events
 
 ## Table of Contents:
 
@@ -91,11 +91,10 @@ The purpose and need for each of the fields and Interfaces will be explained in 
        - `eventStartDate`: Start Date of that event instance.
        - `eventEndDate`: End Date of that event instance.
 
-         :::note
-         These dates will be selected from the create event modal, and would specify the event duration in days.
+         
+         > These dates will be selected from the create event modal, and would specify the event duration in days.
          i.e. If for an event, we select `eventStartDate: "2024-18-04"` & `eventEndDate: "2024-20-04"`, then all of the generated instances of that recurring event will
          have that two day gap between their start and end dates.
-         :::
 
      - `RecurrenceRuleInput`:
 
@@ -103,9 +102,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
        - `recurrenceEndDate`: End Date of recurrence. By default, it will be null, i.e.
          default infinite recurrence. It can be changed through the custom recurrence modal.
 
-         :::note
-         Only one of `recurrenceEndDate` or `count` will exist. i.e. if we select a specific end date of recurrence, `count` will be null, if we chose a specific count istead, then `recurrenceEndDate` will be null.
-         :::
+         >Only one of `recurrenceEndDate` or `count` will exist. i.e. if we select a specific end date of recurrence, `count` will be null, if we chose a specific count istead, then `recurrenceEndDate` will be null.
 
    - Create a `RecurrenceRule` document that would contain the `recurrenceRuleString` and the recurrence fields for easy understanding and debugging, let's name this document's `_id` to be `recurranceRuleId`. Set it's `latestInstanceDate` to be the last date generated during this mutation.
 
@@ -137,9 +134,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
      - `thisInstance`: Just make a regular update on this event instance ([updateThisInstance.ts](https://github.com/PalisadoesFoundation/talawa-api/blob/develop/src/helpers/event/updateEventHelpers/updateThisInstance.ts))
 
-       :::note
-       Updating a single recurring event instance will make it an exception instance.
-       :::
+       > Updating a single recurring event instance will make it an exception instance.
 
      - `thisAndFollowingInstances` or `allInstances` ([updateRecurringEventInstances.ts](https://github.com/PalisadoesFoundation/talawa-api/blob/develop/src/helpers/event/updateEventHelpers/updateRecurringEventInstances.ts)):
 
@@ -154,9 +149,7 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
        - Update the `BaseRecurringEvent` document if required to have values of the current update input (which would then be used as the new base event).
 
-       :::note
-       Here we're not creating a new `BaseRecurringEvent` document, just updating the existing one. i.e. For one recurring event, there would only be one `BaseRecurringEvent`, which would connect all the instances, even accross different recurrence rules.
-       :::
+       > Here we're not creating a new `BaseRecurringEvent` document, just updating the existing one. i.e. For one recurring event, there would only be one `BaseRecurringEvent`, which would connect all the instances, even accross different recurrence rules.
 
 <br />
 
@@ -180,13 +173,11 @@ The purpose and need for each of the fields and Interfaces will be explained in 
 
 <br />
 
-:::note
-Updates would only be done on the `BaseRecurringEvent` if bulk operations being are done on the instances following the latest `RecurrenceRule`, because we want to generate new instances (during queries) based on the `BaseRecurringEvent`.
-
-How do we ensure that?
-
-- By adding a check, of end dates. i.e. we would only modify the `BaseRecurringEvent` if its `eventEndDate` matches the `recurrenceEndDate` of the current `RecurrenceRule` (_[shouldUpdateBaseRecurringEvent.ts](https://github.com/PalisadoesFoundation/talawa-api/blob/develop/src/helpers/event/updateEventHelpers/shouldUpdateBaseRecurringEvent.ts)_).
-  :::
+> Updates would only be done on the `BaseRecurringEvent` if bulk operations being are done on the instances following the latest `RecurrenceRule`, because we want to generate new instances (during queries) based on the `BaseRecurringEvent`.
+> 
+> How do we ensure that?
+> 
+>- By adding a check, of end dates. i.e. we would only modify the `BaseRecurringEvent` if its `eventEndDate` matches the `recurrenceEndDate` of the current `RecurrenceRule` (_[shouldUpdateBaseRecurringEvent.ts](https://github.com/PalisadoesFoundation/talawa-api/blob/develop/src/helpers/event/updateEventHelpers/shouldUpdateBaseRecurringEvent.ts)_).
 
 <br />
 
