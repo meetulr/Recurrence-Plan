@@ -1,5 +1,5 @@
 
-## Unserstanding The Creation and Management of Recurring Events
+## Creation and Management of Recurring Events
 
 ## Table of Contents:
 
